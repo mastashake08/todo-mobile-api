@@ -15,7 +15,6 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->foreignId('user_id')
               ->constrained()
               ->onUpdate('cascade')

@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TodoController;
+use App\Http\Resources\UserResource;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +20,10 @@ Route::post('token', [AuthController::class, 'requestToken']);
 Route::post('register', [AuthController::class, 'register']);
 
 // Sanctum middleware group
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+  Route::get('/user', function (Request $request) {
+      return new UserResource($request->user());
+  });
+
+  Route::resource('todos', TodoController::class);
 });
