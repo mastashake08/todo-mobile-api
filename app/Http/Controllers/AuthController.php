@@ -13,8 +13,7 @@ class AuthController extends Controller
     public function requestToken(Request $request) {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+            'password' => 'required'
         ]);
         $user = User::where('email', $request->email)->first();
         if (! $user || ! Hash::check($request->password, $user->password)) {
