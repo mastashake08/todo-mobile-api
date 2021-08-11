@@ -25,5 +25,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
       return new UserResource($request->user());
   });
 
-  Route::resource('todos', TodoController::class);
+  Route::resource('/todos', TodoController::class);
 });
